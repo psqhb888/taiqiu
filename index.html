@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool Master - Free Online Pool Game | Play Billiards Online</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Play Pool Master - A free online billiards game with realistic physics, multiple levels, and mobile support. Perfect for pool enthusiasts and casual players.">
+    <meta name="keywords" content="pool game, billiards, online pool, free pool game, billiards game, pool master, 8 ball pool, snooker game">
+    <meta name="author" content="Pool Master">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://poolmaster.game/">
+    <meta property="og:title" content="Pool Master - Free Online Pool Game">
+    <meta property="og:description" content="Play Pool Master - A free online billiards game with realistic physics, multiple levels, and mobile support.">
+    <meta property="og:image" content="https://poolmaster.game/images/pool-master-preview.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://poolmaster.game/">
+    <meta property="twitter:title" content="Pool Master - Free Online Pool Game">
+    <meta property="twitter:description" content="Play Pool Master - A free online billiards game with realistic physics, multiple levels, and mobile support.">
+    <meta property="twitter:image" content="https://poolmaster.game/images/pool-master-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://poolmaster.game/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Pool Master",
+        "description": "A free online billiards game with realistic physics, multiple levels, and mobile support.",
+        "applicationCategory": "Game",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Realistic physics engine",
+            "Multiple levels",
+            "Mobile support",
+            "Power control system",
+            "Tutorial levels"
+        ],
+        "screenshot": "https://poolmaster.game/images/pool-master-preview.jpg",
+        "url": "https://poolmaster.game/"
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top-controls">
+        <button id="restartGame">Restart Game</button>
+        <button id="selectLevel">Select Level</button>
+    </div>
+
+    <div class="game-container">
+        <header>
+            <h1>Pool Master</h1>
+            <div class="game-stats">
+                <span>Level: <span id="current-level">1</span></span>
+                <span>Score: <span id="score">0</span></span>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+        
+        <div class="controls">
+            <div class="power-meter"></div>
+            <div class="mobile-controls">
+                <div class="direction-controls">
+                    <button id="leftBtn">←</button>
+                    <button id="rightBtn">→</button>
+                </div>
+                <button id="shootBtn">SHOOT</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu" class="menu">
+        <h2>Pool Master</h2>
+        <button id="startGame">Start Game</button>
+    </div>
+
+    <div id="levelComplete" class="level-complete">
+        <h2>Level Complete!</h2>
+        <p>Score: <span id="levelScore">0</span></p>
+        <button id="nextLevel">Next Level</button>
+    </div>
+
+    <div class="friend-links">
+        <h3>More Games</h3>
+        <div class="link-buttons">
+            <a href="#" class="link-btn">Snake Game</a>
+            <a href="#" class="link-btn">Tetris</a>
+            <a href="#" class="link-btn">Pacman</a>
+            <a href="#" class="link-btn">2048</a>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html> 
