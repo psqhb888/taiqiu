@@ -10,6 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Microsoft YaHei', sans-serif;
             background: #1a1a1a;
@@ -17,11 +18,13 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         .header {
             background: #000;
             padding: 15px 0;
@@ -31,21 +34,25 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
+
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .logo {
             color: #fff;
             font-size: 24px;
             text-decoration: none;
             font-weight: bold;
         }
+
         .menu {
             display: flex;
             gap: 20px;
         }
+
         .menu-item {
             color: #fff;
             text-decoration: none;
@@ -53,15 +60,18 @@
             border-radius: 5px;
             transition: background 0.3s;
         }
+
         .menu-item:hover {
             background: rgba(255,255,255,0.1);
         }
+
         .main-content {
             margin-top: 80px;
             display: flex;
             gap: 20px;
             padding: 20px 0;
         }
+
         .game-section {
             flex: 1;
             background: #2a2a2a;
@@ -69,25 +79,19 @@
             overflow: hidden;
         }
 
-        /* 重点修改：设置 game-container 为相对定位 + overflow:hidden */
         .game-container {
             position: relative;
             width: 100%;
-            /* 根据你需要的显示比例调整，这里先保留原 16:9 */
-            padding-top: 56.25%;
-            overflow: hidden; /* 关键：隐藏超出区域 */
+            padding-top: 56.25%; /* 16:9 比例 */
+            overflow: hidden;
         }
 
-        /* 重点修改：iframe 位移或加大高度来“挤掉”下方按钮 */
         .game-frame {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            /* 这里演示往下多出 60px，把底部区域“挤”到看不到的地方 */
-            height: calc(100% + 60px);
-            /* 如果按钮在页面底部，就往上移动 60px */
-            transform: translateY(-60px);
+            height: 100%;
             border: none;
             background: #000;
         }
@@ -98,10 +102,12 @@
             border-radius: 10px;
             padding: 20px;
         }
+
         .game-list {
             display: grid;
             gap: 15px;
         }
+
         .game-item {
             background: #333;
             border-radius: 8px;
@@ -109,26 +115,32 @@
             cursor: pointer;
             transition: transform 0.3s;
         }
+
         .game-item:hover {
             transform: translateY(-5px);
         }
+
         .game-item img {
             width: 100%;
             height: 120px;
             object-fit: cover;
         }
+
         .game-info {
             padding: 10px;
         }
+
         .game-info h3 {
             color: #fff;
             font-size: 16px;
             margin-bottom: 5px;
         }
+
         .game-info p {
             color: #999;
             font-size: 14px;
         }
+
         .category-title {
             color: #fff;
             margin-bottom: 15px;
@@ -147,13 +159,13 @@
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
         }
+
         @media (max-width: 768px) {
             .menu {
                 display: none;
             }
-            /* 移动端比例可改成 4:3 或更高，避免按钮出现 */
             .game-container {
-                padding-top: 75%; 
+                padding-top: 75%; /* 移动端4:3比例 */
             }
         }
     </style>
@@ -177,15 +189,13 @@
         <div class="main-content">
             <section class="game-section">
                 <div class="game-container">
+                    <!-- 测试用无额外按钮的嵌入代码 -->
                     <iframe id="gameFrame" 
                             class="game-frame" 
-                            src="about:blank"
-                            allow="fullscreen"
+                            src="https://html5.gamedistribution.com/2c00cf7e7fe049e4967fc86071ec0b5a/?gd_sdk_referrer_url=example.com"
+                            frameborder="0"
                             scrolling="no"
-                            allowfullscreen="true"
-                            webkitallowfullscreen="true" 
-                            mozallowfullscreen="true"
-                            msallowfullscreen="true">
+                            allowfullscreen>
                     </iframe>
                 </div>
             </section>
@@ -193,32 +203,32 @@
             <aside class="sidebar">
                 <h2 class="category-title">推荐游戏</h2>
                 <div class="game-list">
-                    <div class="game-item" onclick="loadGame('knock-and-run')">
-                        <img src="https://images.crazygames.com/knock-and-run.png" alt="Knock and Run">
+                    <div class="game-item">
+                        <img src="https://via.placeholder.com/300x120.png?text=游戏1" alt="游戏1">
                         <div class="game-info">
-                            <h3>Knock and Run</h3>
-                            <p>100道门逃生</p>
+                            <h3>游戏1</h3>
+                            <p>测试游戏1</p>
                         </div>
                     </div>
-                    <div class="game-item" onclick="loadGame('draw-climber')">
-                        <img src="https://images.crazygames.com/draw-climber.png" alt="Draw Climber">
+                    <div class="game-item">
+                        <img src="https://via.placeholder.com/300x120.png?text=游戏2" alt="游戏2">
                         <div class="game-info">
-                            <h3>Draw Climber</h3>
-                            <p>创意攀爬</p>
+                            <h3>游戏2</h3>
+                            <p>测试游戏2</p>
                         </div>
                     </div>
-                    <div class="game-item" onclick="loadGame('traffic-rider')">
-                        <img src="https://images.crazygames.com/traffic-rider.png" alt="Traffic Rider">
+                    <div class="game-item">
+                        <img src="https://via.placeholder.com/300x120.png?text=游戏3" alt="游戏3">
                         <div class="game-info">
-                            <h3>Traffic Rider</h3>
-                            <p>摩托竞速</p>
+                            <h3>游戏3</h3>
+                            <p>测试游戏3</p>
                         </div>
                     </div>
-                    <div class="game-item" onclick="loadGame('penguin-restaurant')">
-                        <img src="https://images.crazygames.com/penguin-restaurant.png" alt="Penguin Restaurant">
+                    <div class="game-item">
+                        <img src="https://via.placeholder.com/300x120.png?text=游戏4" alt="游戏4">
                         <div class="game-info">
-                            <h3>Penguin Restaurant</h3>
-                            <p>企鹅餐厅</p>
+                            <h3>游戏4</h3>
+                            <p>测试游戏4</p>
                         </div>
                     </div>
                 </div>
@@ -226,45 +236,6 @@
         </div>
     </div>
 
-    <script>
-        // 游戏配置
-        const games = {
-            'knock-and-run': {
-                url: 'https://games.crazygames.com/games/knock-and-run/index.html',
-                title: 'Knock and Run'
-            },
-            'draw-climber': {
-                url: 'https://games.crazygames.com/games/draw-climber/index.html',
-                title: 'Draw Climber'
-            },
-            'traffic-rider': {
-                url: 'https://games.crazygames.com/games/traffic-rider/index.html',
-                title: 'Traffic Rider'
-            },
-            'penguin-restaurant': {
-                url: 'https://games.crazygames.com/games/penguin-restaurant/index.html',
-                title: 'Penguin Restaurant'
-            }
-        };
-
-        function loadGame(gameId) {
-            const gameFrame = document.getElementById('gameFrame');
-            const game = games[gameId];
-            if (!game) return;
-
-            // 重置iframe
-            gameFrame.src = 'about:blank';
-            // 设置新的游戏URL
-            setTimeout(() => {
-                gameFrame.src = game.url;
-                document.title = game.title + ' - 游戏中心';
-            }, 100);
-        }
-
-        // 初始加载第一个游戏
-        window.onload = function() {
-            loadGame('knock-and-run');
-        };
-    </script>
+    <!-- 此处移除原有的JS游戏切换功能，仅用于测试嵌入效果 -->
 </body>
 </html>
