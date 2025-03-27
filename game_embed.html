@@ -1,67 +1,156 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>在线游戏中心 - 测试无广告游戏</title>
-  <style>
-    /* 简化的样式，仅供演示 */
-    body {
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #fff;
-      font-family: "Microsoft YaHei", sans-serif;
-    }
-    .container {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 15px;
-      font-size: 24px;
-    }
-    .game-container {
-      position: relative;
-      width: 100%;
-      /* 480x640的纵向比例：640/480=1.333 => 133.33% */
-      padding-top: 133.33%;
-      background: #222;
-      overflow: hidden;
-      border-radius: 8px;
-    }
-    .game-frame {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .footer {
-      margin-top: 30px;
-      font-size: 14px;
-      color: #888;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #4a90e2;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .iframe-wrapper {
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .iframe-wrapper iframe {
+            border: none;
+            display: block;
+        }
+
+        .visible-iframe {
+            width: 100%;
+            height: 600px;
+        }
+
+        .hidden-iframe {
+            width: 0;
+            height: 0;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .control-button {
+            padding: 8px 16px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .control-button:hover {
+            background: #357abd;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .game-container {
+                padding: 10px;
+            }
+
+            .visible-iframe {
+                height: 400px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>测试：无“Buy Now”按钮的免费游戏</h1>
-    <p>下面这款 Flappy Bird (Doodle) 游戏来自 itch.io，完全免费，无购买按钮。</p>
     <div class="game-container">
-      <iframe
-        class="game-frame"
-        src="https://itch.io/embed/1014562?border_width=0"
-        scrolling="no"
-        allowfullscreen
-      ></iframe>
+        <div class="header">
+            <h1>游戏中心</h1>
+        </div>
+
+        <div class="controls">
+            <button class="control-button" onclick="switchFrame(1)">游戏 1</button>
+            <button class="control-button" onclick="switchFrame(2)">游戏 2</button>
+            <button class="control-button" onclick="switchFrame(5)">游戏 3</button>
+        </div>
+
+        <!-- 可见的iframe -->
+        <div class="iframe-wrapper">
+            <iframe id="frame1" class="visible-iframe" src="about:blank" allowfullscreen></iframe>
+        </div>
+        <div class="iframe-wrapper">
+            <iframe id="frame2" class="visible-iframe" src="about:blank" allowfullscreen></iframe>
+        </div>
+        <div class="iframe-wrapper">
+            <iframe id="frame5" class="visible-iframe" src="https://securepubads.g.doubleclick.net/static/topics/topics_frame.html" allowfullscreen></iframe>
+        </div>
+
+        <!-- 隐藏的iframe -->
+        <iframe id="frame3" class="hidden-iframe" src="https://gum.criteo.com/syncframe?origin=publishertagids&topUrl=html5games.com&gdpr=1&gdpr_consent=CQO4KMAQO4KMAEsACBENBiFoAP_gAEPgAAYgIQpD7C7FbSFCwD53aLsEMAhHRtAAQoQgAASBAmABQAKQIBQCgkAYFAygBCACAAAAICRBIQIECAAAAUAAQAAAAAAEAAAAAAAIIAAAgAEAAAAIAAACAIAAEAAIAAAAEAAAmAgAAIIACAAAgAAAAACAAAAAAAAAAACAAAAAAAEAAAAAAAAAAQIIQpB7C7FbSFCyDhXYLsEMAhXRtAAQoQgAASBAmABQAKQIAQCkkAQBEigACAAAAAAICRBIAAIAAgAAEABQAAAAAAEAAAAAAAIIAAAgAEAAAAAAAACAIAAEAAIAAAAEAAAiQgAAIIACAAAAAAAIACAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAIAA.dgAACfgAAAA#{%22bundle%22:{%22value%22:%22JlFcq19CZ1F4ZXhIMWRYU2RTazdWeW5KSzE3T29naXhLMlRReVFtRXV5ODIxWENxQUttZzc1Qm80VUF4WlMlMkY0TFBNUmt5UzZHVXNVeDE5cDYlMkZGYkYyWWttRGhHNjFMNURwWU9LUWtFWXVidExSTzhlRDZ6JTJGU082Y2thNkhSaUU2amlpd0Q0VDhTREt2JTJCTmdvJTJGRUlqVXJseSUyQk45WW54dHJnU0Nwc3RMJTJCdTdDOHBqQSUzRA%22,%22origin%22:1},%22optout%22:{%22value%22:false,%22origin%22:0},%22tld%22:%22html5games.com%22,%22topUrl%22:%22html5games.com%22,%22version%22:159,%22cw%22:true,%22lsw%22:true,%22origin%22:%22publishertagids%22,%22requestId%22:%220.3462455392671495%22}"></iframe>
+        <iframe id="frame4" class="hidden-iframe" src="https://www.google.com/recaptcha/api2/aframe"></iframe>
     </div>
-    <div class="footer">
-      <p>—— 仅供嵌入演示 ——</p>
-    </div>
-  </div>
+
+    <script>
+        // 控制iframe显示/隐藏的函数
+        function switchFrame(frameNumber) {
+            // 获取所有iframe包装器
+            const wrappers = document.querySelectorAll('.iframe-wrapper');
+            
+            // 隐藏所有iframe
+            wrappers.forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+            
+            // 显示选中的iframe
+            const selectedWrapper = document.querySelector(`.iframe-wrapper:nth-child(${frameNumber})`);
+            if (selectedWrapper) {
+                selectedWrapper.style.display = 'block';
+            }
+        }
+
+        // 页面加载时默认显示第一个iframe
+        window.onload = function() {
+            switchFrame(1);
+        };
+    </script>
 </body>
-</html>
+</html> 
