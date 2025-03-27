@@ -83,30 +83,6 @@
             position: relative;
             width: 100%;
             padding-top: 56.25%; /* 16:9 比例 */
-            background: #000;
-        }
-
-        .game-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 9998;
-            pointer-events: none;
-        }
-
-        .game-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px; /* 增加高度以覆盖按钮 */
-            background: #2a2a2a;
-            z-index: 9999;
-            pointer-events: none;
         }
 
         .game-frame {
@@ -117,22 +93,6 @@
             height: 100%;
             border: none;
             background: #000;
-            z-index: 1;
-        }
-
-        iframe#gameFrame {
-            isolation: isolate;
-        }
-
-        .game-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: #2a2a2a;
-            z-index: 10000;
-            pointer-events: none;
         }
 
         .sidebar {
@@ -234,14 +194,13 @@
                     <iframe id="gameFrame" 
                             class="game-frame" 
                             src="about:blank"
-                            sandbox="allow-scripts allow-same-origin allow-popups"
+                            allow="fullscreen"
                             scrolling="no"
                             allowfullscreen="true"
                             webkitallowfullscreen="true" 
                             mozallowfullscreen="true"
                             msallowfullscreen="true"
                     ></iframe>
-                    <div class="game-overlay"></div>
                 </div>
             </section>
 
@@ -282,62 +241,39 @@
     </div>
 
     <script>
-        // 防止iframe内容跳转到原网站
-        function setupFrameProtection(frame) {
-            try {
-                frame.onload = function() {
-                    frame.contentWindow.onbeforeunload = function() {
-                        return false;
-                    };
-                    
-                    // 添加额外的DOM操作来移除按钮
-                    try {
-                        const frameDoc = frame.contentWindow.document;
-                        const style = frameDoc.createElement('style');
-                        style.textContent = `
-                            [class*="crazygames"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="crazy-games"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [id*="crazygames"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [id*="crazy-games"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            .play-on-cg { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            .more-games { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="play-button"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="logo"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="banner"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="splash"] { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                            [class*="progress"] + div { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-                        `;
-                        frameDoc.head.appendChild(style);
-
-                        // 定期检查并移除元素
-                        setInterval(() => {
-                            try {
-                                const elements = frameDoc.querySelectorAll('[class*="crazygames"], [class*="crazy-games"], .play-on-cg, .more-games, [class*="play-button"], [class*="logo"], [class*="banner"], [class*="splash"]');
-                                elements.forEach(el => el.remove());
-                            } catch (e) {
-                                console.log('Element removal failed:', e);
-                            }
-                        }, 1000);
-                    } catch (e) {
-                        console.log('Additional protection setup failed:', e);
-                    }
-                };
-            } catch (e) {
-                console.log('Frame protection setup failed:', e);
+        // 游戏配置
+        const games = {
+            'knock-and-run': {
+                url: 'https://games.crazygames.com/games/knock-and-run/index.html',
+                title: 'Knock and Run'
+            },
+            'draw-climber': {
+                url: 'https://games.crazygames.com/games/draw-climber/index.html',
+                title: 'Draw Climber'
+            },
+            'traffic-rider': {
+                url: 'https://games.crazygames.com/games/traffic-rider/index.html',
+                title: 'Traffic Rider'
+            },
+            'penguin-restaurant': {
+                url: 'https://games.crazygames.com/games/penguin-restaurant/index.html',
+                title: 'Penguin Restaurant'
             }
-        }
+        };
 
         function loadGame(gameId) {
             const gameFrame = document.getElementById('gameFrame');
-            const gameUrl = `https://games.crazygames.com/en_US/${gameId}/index.html`;
+            const game = games[gameId];
             
+            if (!game) return;
+
             // 重置iframe
             gameFrame.src = 'about:blank';
             
             // 设置新的游戏URL
             setTimeout(() => {
-                gameFrame.src = gameUrl;
-                setupFrameProtection(gameFrame);
+                gameFrame.src = game.url;
+                document.title = game.title + ' - 游戏中心';
             }, 100);
         }
 
