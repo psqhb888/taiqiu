@@ -95,6 +95,34 @@
             background: #000;
         }
 
+        .game-frame::before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #1a1a1a;
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        iframe#gameFrame {
+            isolation: isolate;
+        }
+
+        .game-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: #1a1a1a;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
         .sidebar {
             width: 300px;
             background: #2a2a2a;
@@ -248,6 +276,23 @@
                     frame.contentWindow.onbeforeunload = function() {
                         return false;
                     };
+                    
+                    // 添加额外的DOM操作来移除按钮
+                    try {
+                        const frameDoc = frame.contentWindow.document;
+                        const style = frameDoc.createElement('style');
+                        style.textContent = `
+                            [class*="crazygames"] { display: none !important; }
+                            [class*="crazy-games"] { display: none !important; }
+                            [id*="crazygames"] { display: none !important; }
+                            [id*="crazy-games"] { display: none !important; }
+                            .play-on-cg { display: none !important; }
+                            .more-games { display: none !important; }
+                        `;
+                        frameDoc.head.appendChild(style);
+                    } catch (e) {
+                        console.log('Additional protection setup failed:', e);
+                    }
                 };
             } catch (e) {
                 console.log('Frame protection setup failed:', e);
@@ -274,5 +319,4 @@
         };
     </script>
 </body>
-</html> 
 </html> 
