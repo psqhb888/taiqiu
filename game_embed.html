@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏中心</title>
+    <title>游戏中心 - 在线游戏</title>
+    <meta name="description" content="免费在线玩游戏，无需下载安装。">
+    <meta name="keywords" content="在线游戏,休闲游戏,免费游戏">
+    <meta name="author" content="游戏中心">
+    
     <style>
+        /* 保留原有的基础样式 */
         * {
             margin: 0;
             padding: 0;
@@ -13,49 +18,87 @@
 
         body {
             font-family: 'Microsoft YaHei', sans-serif;
-            background: #f0f0f0;
+            line-height: 1.6;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .game-container {
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
             max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 0 auto;
             padding: 20px;
-            margin-bottom: 20px;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background: #4a90e2;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
-            border-radius: 4px;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .home-button {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .game-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 新增的iframe容器样式 */
+        .iframe-container {
+            width: 100%;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .iframe-wrapper {
-            margin-bottom: 20px;
-            border-radius: 4px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
             overflow: hidden;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .iframe-wrapper iframe {
-            border: none;
-            display: block;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .visible-iframe {
             width: 100%;
             height: 600px;
+            border: none;
         }
 
         .hidden-iframe {
@@ -63,36 +106,33 @@
             height: 0;
             position: absolute;
             visibility: hidden;
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            justify-content: center;
-        }
-
-        .control-button {
-            padding: 8px 16px;
-            background: #4a90e2;
-            color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
         }
 
-        .control-button:hover {
-            background: #357abd;
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            margin-top: 40px;
         }
 
         @media (max-width: 768px) {
-            body {
+            .container {
                 padding: 10px;
             }
-
-            .game-container {
-                padding: 10px;
+            
+            .header {
+                padding: 20px 0;
+            }
+            
+            .home-button {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+                display: inline-block;
+                padding: 12px 25px;
+                font-size: 18px;
             }
 
             .visible-iframe {
@@ -102,55 +142,39 @@
     </style>
 </head>
 <body>
-    <div class="game-container">
-        <div class="header">
+    <div class="header">
+        <a href="/" class="home-button">首页</a>
+        <div class="container">
             <h1>游戏中心</h1>
+            <p>在线游戏</p>
         </div>
-
-        <div class="controls">
-            <button class="control-button" onclick="switchFrame(1)">游戏 1</button>
-            <button class="control-button" onclick="switchFrame(2)">游戏 2</button>
-            <button class="control-button" onclick="switchFrame(5)">游戏 3</button>
-        </div>
-
-        <!-- 可见的iframe -->
-        <div class="iframe-wrapper">
-            <iframe id="frame1" class="visible-iframe" src="about:blank" allowfullscreen></iframe>
-        </div>
-        <div class="iframe-wrapper">
-            <iframe id="frame2" class="visible-iframe" src="about:blank" allowfullscreen></iframe>
-        </div>
-        <div class="iframe-wrapper">
-            <iframe id="frame5" class="visible-iframe" src="https://securepubads.g.doubleclick.net/static/topics/topics_frame.html" allowfullscreen></iframe>
-        </div>
-
-        <!-- 隐藏的iframe -->
-        <iframe id="frame3" class="hidden-iframe" src="https://gum.criteo.com/syncframe?origin=publishertagids&topUrl=html5games.com&gdpr=1&gdpr_consent=CQO4KMAQO4KMAEsACBENBiFoAP_gAEPgAAYgIQpD7C7FbSFCwD53aLsEMAhHRtAAQoQgAASBAmABQAKQIBQCgkAYFAygBCACAAAAICRBIQIECAAAAUAAQAAAAAAEAAAAAAAIIAAAgAEAAAAIAAACAIAAEAAIAAAAEAAAmAgAAIIACAAAgAAAAACAAAAAAAAAAACAAAAAAAEAAAAAAAAAAQIIQpB7C7FbSFCyDhXYLsEMAhXRtAAQoQgAASBAmABQAKQIAQCkkAQBEigACAAAAAAICRBIAAIAAgAAEABQAAAAAAEAAAAAAAIIAAAgAEAAAAAAAACAIAAEAAIAAAAEAAAiQgAAIIACAAAAAAAIACAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAIAA.dgAACfgAAAA#{%22bundle%22:{%22value%22:%22JlFcq19CZ1F4ZXhIMWRYU2RTazdWeW5KSzE3T29naXhLMlRReVFtRXV5ODIxWENxQUttZzc1Qm80VUF4WlMlMkY0TFBNUmt5UzZHVXNVeDE5cDYlMkZGYkYyWWttRGhHNjFMNURwWU9LUWtFWXVidExSTzhlRDZ6JTJGU082Y2thNkhSaUU2amlpd0Q0VDhTREt2JTJCTmdvJTJGRUlqVXJseSUyQk45WW54dHJnU0Nwc3RMJTJCdTdDOHBqQSUzRA%22,%22origin%22:1},%22optout%22:{%22value%22:false,%22origin%22:0},%22tld%22:%22html5games.com%22,%22topUrl%22:%22html5games.com%22,%22version%22:159,%22cw%22:true,%22lsw%22:true,%22origin%22:%22publishertagids%22,%22requestId%22:%220.3462455392671495%22}"></iframe>
-        <iframe id="frame4" class="hidden-iframe" src="https://www.google.com/recaptcha/api2/aframe"></iframe>
     </div>
 
-    <script>
-        // 控制iframe显示/隐藏的函数
-        function switchFrame(frameNumber) {
-            // 获取所有iframe包装器
-            const wrappers = document.querySelectorAll('.iframe-wrapper');
-            
-            // 隐藏所有iframe
-            wrappers.forEach(wrapper => {
-                wrapper.style.display = 'none';
-            });
-            
-            // 显示选中的iframe
-            const selectedWrapper = document.querySelector(`.iframe-wrapper:nth-child(${frameNumber})`);
-            if (selectedWrapper) {
-                selectedWrapper.style.display = 'block';
-            }
-        }
+    <div class="container">
+        <div class="game-section">
+            <div class="iframe-container">
+                <!-- 可见的iframe -->
+                <div class="iframe-wrapper">
+                    <iframe class="visible-iframe" src="about:blank" allowfullscreen></iframe>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe class="visible-iframe" src="about:blank" allowfullscreen></iframe>
+                </div>
+                <div class="iframe-wrapper">
+                    <iframe class="visible-iframe" src="https://securepubads.g.doubleclick.net/static/topics/topics_frame.html" allowfullscreen></iframe>
+                </div>
 
-        // 页面加载时默认显示第一个iframe
-        window.onload = function() {
-            switchFrame(1);
-        };
-    </script>
+                <!-- 隐藏的iframe -->
+                <iframe class="hidden-iframe" src="https://gum.criteo.com/syncframe?origin=publishertagids&topUrl=html5games.com&gdpr=1&gdpr_consent=CQO4KMAQO4KMAEsACBENBiFoAP_gAEPgAAYgIQpD7C7FbSFCwD53aLsEMAhHRtAAQoQgAASBAmABQAKQIBQCgkAYFAygBCACAAAAICRBIQIECAAAAUAAQAAAAAAEAAAAAAAIIAAAgAEAAAAIAAACAIAAEAAIAAAAEAAAmAgAAIIACAAAgAAAAACAAAAAAAAAAACAAAAAAAEAAAAAAAAAAQIIQpB7C7FbSFCyDhXYLsEMAhXRtAAQoQgAASBAmABQAKQIAQCkkAQBEigACAAAAAAICRBIAAIAAgAAEABQAAAAAAEAAAAAAAIIAAAgAEAAAAAAAACAIAAEAAIAAAAEAAAiQgAAIIACAAAAAAAIACAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAIAA.dgAACfgAAAA#{%22bundle%22:{%22value%22:%22JlFcq19CZ1F4ZXhIMWRYU2RTazdWeW5KSzE3T29naXhLMlRReVFtRXV5ODIxWENxQUttZzc1Qm80VUF4WlMlMkY0TFBNUmt5UzZHVXNVeDE5cDYlMkZGYkYyWWttRGhHNjFMNURwWU9LUWtFWXVidExSTzhlRDZ6JTJGU082Y2thNkhSaUU2amlpd0Q0VDhTREt2JTJCTmdvJTJGRUlqVXJseSUyQk45WW54dHJnU0Nwc3RMJTJCdTdDOHBqQSUzRA%22,%22origin%22:1},%22optout%22:{%22value%22:false,%22origin%22:0},%22tld%22:%22html5games.com%22,%22topUrl%22:%22html5games.com%22,%22version%22:159,%22cw%22:true,%22lsw%22:true,%22origin%22:%22publishertagids%22,%22requestId%22:%220.3462455392671495%22}"></iframe>
+                <iframe class="hidden-iframe" src="https://www.google.com/recaptcha/api2/aframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 游戏中心. 仅供娱乐使用</p>
+        </div>
+    </footer>
 </body>
 </html> 
