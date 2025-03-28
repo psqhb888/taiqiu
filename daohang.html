@@ -491,49 +491,11 @@
         }
 
         @media (max-width: 480px) {
-            .game-grid {
-                grid-template-columns: repeat(1, 1fr);
-                padding: 0 15px;  /* 添加左右内边距 */
-            }
-            
-            .game-card {
-                width: 100%;  /* 设置宽度为100% */
-                max-width: none;  /* 移除最大宽度限制 */
-                margin: 0 0 20px;  /* 修改外边距 */
-                aspect-ratio: 3/4;  /* 保持固定的宽高比 */
-            }
-
-            .game-image-container {
-                padding-top: 75%;  /* 固定图片容器的高度比例 */
-            }
-
-            .game-image {
-                height: 100%;  /* 确保图片填充整个容器 */
-                object-fit: cover;
-            }
-
-            .game-info {
-                padding: 12px;  /* 增加内边距 */
-                height: 25%;  /* 固定信息区域高度 */
-            }
-
-            .game-title {
-                font-size: 1rem;  /* 增大字体大小 */
-                line-height: 1.2;
-                margin-bottom: 5px;
-            }
-            
-            .game-category {
-                font-size: 0.85rem;  /* 增大字体大小 */
-            }
-
-            /* 调整区块内边距 */
-            .section {
-                padding: 15px 0;  /* 移除左右内边距，保留上下内边距 */
-            }
-
             .header {
-                padding: 0.25rem;  /* 恢复到之前的内边距 */
+                padding: 0.25rem;
+                width: 100%;
+                min-width: 100%;
+                overflow-x: hidden;
             }
 
             .header-content {
@@ -541,36 +503,47 @@
                 justify-content: space-between;
                 align-items: center;
                 gap: 5px;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                min-width: 0;  /* 防止子元素溢出 */
+            }
+
+            .header-left {
+                flex: 1;
+                min-width: 0;  /* 防止子元素溢出 */
             }
 
             .logo {
-                font-size: 1.2rem;  /* 恢复到之前的字体大小 */
+                font-size: 1.2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .language-switch {
-                gap: 0.5rem;  /* 恢复到之前的间距 */
+                display: flex;
+                gap: 3px;
+                flex-shrink: 0;  /* 防止语言切换按钮被压缩 */
             }
 
             .lang-btn {
-                padding: 0.15rem 0.5rem;  /* 恢复到之前的内边距 */
-                font-size: 0.8rem;  /* 恢复到之前的字体大小 */
-                border-width: 1px;
+                padding: 0.15rem 0.4rem;
+                font-size: 0.8rem;
+                min-width: 35px;
+                white-space: nowrap;
             }
 
             .mobile-menu-btn {
-                font-size: 1.2rem;  /* 恢复到之前的大小 */
+                font-size: 1.2rem;
                 padding: 0.25rem;
+                margin-left: 5px;
+                flex-shrink: 0;  /* 防止菜单按钮被压缩 */
             }
 
-            /* 调整顶部广告区域的边距 */
-            .top-ad-section {
-                margin-top: 40px;  /* 恢复到之前的边距 */
-                padding: 10px;
-            }
-
-            /* 调整移动菜单的位置 */
-            .mobile-menu {
-                top: 35px;  /* 恢复到之前的位置 */
+            body {
+                overflow-x: hidden;  /* 防止页面整体左右滚动 */
+                width: 100%;
             }
         }
 
