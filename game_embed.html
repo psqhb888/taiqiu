@@ -312,6 +312,11 @@
                 right: -2%;
                 width: 15%;
             }
+
+            .header-overlay {
+                transform: scale(1);
+                height: 12%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -352,6 +357,10 @@
             .right-overlay {
                 right: -1%;
                 width: 12%;
+            }
+
+            .header-overlay {
+                height: 10%;
             }
         }
 
@@ -417,6 +426,24 @@
             transform: scale(1.143);
             transform-origin: right center;
         }
+
+        .header-overlay {
+            position: absolute;
+            top: -3%;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            transform: scale(1.143);
+            transform-origin: top center;
+            transition: opacity 0.5s ease;
+        }
+
+        .header-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -438,6 +465,7 @@
                     allow="autoplay"
                     allowfullscreen>
                 </iframe>
+                <div class="header-overlay"></div>
                 <div class="timed-overlay"></div>
                 <div class="right-overlay"></div>
             </div>
@@ -479,14 +507,23 @@
         // 获取iframe元素
         const gameFrame = document.querySelector('.game-frame');
         const timedOverlay = document.querySelector('.timed-overlay');
+        const headerOverlay = document.querySelector('.header-overlay');
         
-        // 10秒后隐藏覆盖层
+        // 10秒后隐藏第一个覆盖层
         setTimeout(() => {
             timedOverlay.classList.add('hidden');
             setTimeout(() => {
                 timedOverlay.remove();
             }, 500);
         }, 10000);
+
+        // 25秒后隐藏头部覆盖层
+        setTimeout(() => {
+            headerOverlay.classList.add('hidden');
+            setTimeout(() => {
+                headerOverlay.remove();
+            }, 500);
+        }, 25000);
 
         // 监听iframe加载完成事件
         gameFrame.addEventListener('load', function() {
