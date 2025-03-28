@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏中心 - 游戏模板</title>
+    <title>Game Center - Game Template</title>
     <style>
         * {
             margin: 0;
@@ -100,7 +100,7 @@
             border-radius: 10px;
             overflow: hidden;
             border: 2px solid #ff4444;
-            transform: scale(1.143); /* 8/7 = 1.143 */
+            transform: scale(1.143);
             transform-origin: center center;
         }
 
@@ -267,12 +267,11 @@
 
             .game-container {
                 padding: 10px;
-                border-radius: 10px;
             }
 
             .game-wrapper {
+                transform: scale(1);
                 aspect-ratio: 4/3;
-                border-width: 1px;
             }
 
             .game-info-section {
@@ -302,6 +301,17 @@
                 padding: 15px;
                 font-size: 12px;
             }
+
+            .timed-overlay {
+                transform: scale(1);
+                top: -8%;
+            }
+
+            .right-overlay {
+                transform: scale(1);
+                right: -2%;
+                width: 15%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -324,7 +334,7 @@
             }
 
             .game-wrapper {
-                aspect-ratio: 1/1;  /* 在最小屏幕上使用正方形比例 */
+                aspect-ratio: 3/4;
             }
 
             .game-info-section {
@@ -333,6 +343,15 @@
 
             .game-info-section .info-block {
                 margin-bottom: 15px;
+            }
+
+            .timed-overlay {
+                top: -6%;
+            }
+
+            .right-overlay {
+                right: -1%;
+                width: 12%;
             }
         }
 
@@ -403,8 +422,8 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="index.html" class="home-button">返回首页</a>
-            <h1>游戏中心</h1>
+            <a href="index.html" class="home-button">Back to Home</a>
+            <h1>Game Center</h1>
         </div>
     </header>
 
@@ -423,27 +442,27 @@
                 <div class="right-overlay"></div>
             </div>
             <div class="game-info-section">
-                <h2>游戏说明</h2>
+                <h2>Game Instructions</h2>
                 <div class="info-block">
-                    <h3>游戏简介</h3>
-                    <p>Train Miner是一款有趣的列车挖矿游戏。你需要控制列车在矿洞中收集资源，同时避开障碍物。</p>
+                    <h3>Game Introduction</h3>
+                    <p>Train Miner is an exciting train mining game. Control your train to collect resources in the mine while avoiding obstacles.</p>
                 </div>
                 <div class="info-block">
-                    <h3>游戏规则</h3>
+                    <h3>Game Rules</h3>
                     <ul>
-                        <li>控制列车在矿洞中移动</li>
-                        <li>收集沿途的矿石和资源</li>
-                        <li>避开障碍物和危险</li>
-                        <li>尽可能获得高分</li>
+                        <li>Control the train movement in the mine</li>
+                        <li>Collect minerals and resources along the way</li>
+                        <li>Avoid obstacles and dangers</li>
+                        <li>Try to achieve high scores</li>
                     </ul>
                 </div>
                 <div class="info-block">
-                    <h3>操作说明</h3>
+                    <h3>Controls</h3>
                     <ul>
-                        <li>使用方向键控制列车移动</li>
-                        <li>空格键进行特殊操作</li>
-                        <li>注意收集能量补给</li>
-                        <li>合理规划路线</li>
+                        <li>Use arrow keys to control train movement</li>
+                        <li>Press spacebar for special actions</li>
+                        <li>Remember to collect energy supplies</li>
+                        <li>Plan your route wisely</li>
                     </ul>
                 </div>
             </div>
@@ -452,7 +471,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2024 游戏中心. 仅供娱乐使用</p>
+            <p>© 2024 Game Center. For entertainment purposes only</p>
         </div>
     </footer>
 
