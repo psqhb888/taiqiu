@@ -117,7 +117,7 @@
         .header {
             background: linear-gradient(135deg, #1e88e5, #1565c0);
             color: white;
-            padding: 1rem;
+            padding: 0.5rem;
             position: fixed;
             width: 100%;
             top: 0;
@@ -136,12 +136,12 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-menu {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             list-style: none;
         }
 
@@ -149,9 +149,10 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
         .nav-menu a:hover {
@@ -203,7 +204,7 @@
         }
 
         .logo {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: white;
             text-decoration: none;
@@ -224,11 +225,12 @@
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.5);
             color: white;
-            padding: 0.5rem 1.2rem;
+            padding: 0.3rem 1rem;
             cursor: pointer;
             border-radius: 25px;
             transition: all 0.3s;
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .lang-btn:hover {
@@ -239,7 +241,7 @@
 
         /* Main Content */
         .main-content {
-            margin-top: 80px;
+            margin-top: 60px;
             padding: 20px;
             max-width: 1200px;
             margin-left: auto;
@@ -295,17 +297,25 @@
             overflow: hidden;
             transition: transform 0.3s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            aspect-ratio: 3/4; /* 固定卡片宽高比 */
+            aspect-ratio: 3/3;
+            text-decoration: none;
+            display: block;
+            color: inherit;
         }
 
         .game-card:hover {
             transform: translateY(-5px);
         }
 
+        .game-card:focus {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
         .game-image-container {
             position: relative;
             width: 100%;
-            padding-top: 75%; /* 4:3 比例 */
+            padding-top: 60%; /* 从 75% 改为 60%，使图片区域更短 */
             overflow: hidden;
         }
 
@@ -320,8 +330,8 @@
         }
 
         .game-info {
-            padding: 10px;
-            height: 25%; /* 固定信息区域高度 */
+            padding: 8px; /* 从 10px 改为 8px */
+            height: 40%; /* 从 25% 改为 40%，增加信息区域高度 */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -330,8 +340,8 @@
         }
 
         .game-title {
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-size: 0.85rem; /* 从 0.9rem 改为 0.85rem */
+            margin-bottom: 3px; /* 从 5px 改为 3px */
             color: var(--text-color);
             overflow: hidden;
             text-overflow: ellipsis;
@@ -339,12 +349,12 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             line-height: 1.2;
-            max-height: 2.4em; /* 固定两行高度 */
+            max-height: 2.4em;
             word-break: break-word;
         }
 
         .game-category {
-            font-size: 0.8rem;
+            font-size: 0.75rem; /* 从 0.8rem 改为 0.75rem */
             color: #666;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -410,7 +420,7 @@
             }
 
             .logo {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
 
             .language-switch {
@@ -418,8 +428,8 @@
             }
 
             .lang-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.9rem;
+                padding: 0.2rem 0.8rem;
+                font-size: 0.85rem;
             }
 
             .section {
@@ -473,6 +483,10 @@
 
             .header-left {
                 gap: 1rem;
+            }
+
+            .top-ad-section {
+                margin-top: 50px;
             }
         }
 
@@ -573,9 +587,87 @@
                 padding: 25px;
             }
         }
+
+        /* 添加广告区域样式 */
+        .top-ad-section {
+            margin-top: 60px;
+            padding: 15px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .top-ad-box {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .top-ad-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .top-ad-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .top-ad-box .ad-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .top-ad-box .ad-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .top-ad-section {
+                grid-template-columns: 1fr;
+                padding: 10px;
+                margin-top: 50px;
+            }
+
+            .top-ad-box {
+                aspect-ratio: 16/9;
+            }
+
+            .top-ad-box .ad-text {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- 添加加载状态和错误提示 -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="error-message"></div>
     <div class="floating-shapes">
         <div class="shape"></div>
         <div class="shape"></div>
@@ -600,20 +692,26 @@
         <button class="mobile-menu-btn">☰</button>
     </header>
 
+    <!-- 添加顶部广告区域 -->
+    <div class="top-ad-section">
+        <a href="https://snooker.pics/" class="top-ad-box" target="_blank">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop&q=60" alt="Game Advertisement 1">
+            <span class="ad-label">Sponsored</span>
+            <div class="ad-text">体验最刺激的动作游戏，立即开始冒险！</div>
+        </a>
+        <a href="https://snooker.pics/" class="top-ad-box" target="_blank">
+            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop&q=60" alt="Game Advertisement 2">
+            <span class="ad-label">Sponsored</span>
+            <div class="ad-text">挑战你的智力，解开所有谜题！</div>
+        </a>
+    </div>
+
     <div class="mobile-menu">
         <a href="#all">All Games</a>
         <a href="#popular">Popular Games</a>
         <a href="#new">New Games</a>
     </div>
 
-    <div class="ad-section">
-        <div class="ad-box ad-placeholder">
-            <span>Advertisement Space 1</span>
-        </div>
-        <div class="ad-box ad-placeholder">
-            <span>Advertisement Space 2</span>
-        </div>
-    </div>
 
     <main class="main-content">
         <!-- Popular Games Section -->
@@ -643,11 +741,11 @@
         <div class="footer-content">
             <p>&copy; 2024 GameHub. All rights reserved.</p>
             <div class="friend-links">
-                <a href="#" class="friend-link">GameLink 1</a>
-                <a href="#" class="friend-link">GameLink 2</a>
-                <a href="#" class="friend-link">GameLink 3</a>
-                <a href="#" class="friend-link">GameLink 4</a>
-                <a href="#" class="friend-link">GameLink 5</a>
+                <a href="https://snooker.pics/" class="friend-link" target="_blank">GameLink 1</a>
+                <a href="https://snooker.pics/" class="friend-link" target="_blank">GameLink 2</a>
+                <a href="https://snooker.pics/" class="friend-link" target="_blank">GameLink 3</a>
+                <a href="https://snooker.pics/" class="friend-link" target="_blank">GameLink 4</a>
+                <a href="https://snooker.pics/" class="friend-link" target="_blank">GameLink 5</a>
             </div>
         </div>
     </footer>
@@ -712,7 +810,7 @@
         // Function to create game cards
         function createGameCard(game) {
             return `
-                <div class="game-card">
+                <a href="https://snooker.pics/" class="game-card" target="_blank">
                     <div class="game-image-container">
                         <img src="${game.image}" alt="${game.title}" class="game-image">
                     </div>
@@ -720,7 +818,7 @@
                         <h3 class="game-title">${game.title}</h3>
                         <p class="game-category">${game.category}</p>
                     </div>
-                </div>
+                </a>
             `;
         }
 
