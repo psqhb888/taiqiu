@@ -85,12 +85,11 @@
         }
 
         .game-container {
-            max-width: 1200px;
+            position: relative;
+            width: 100%;
+            max-width: 1371px; /* 1200 * 8/7 = 1371px */
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
         .game-wrapper {
@@ -101,6 +100,8 @@
             border-radius: 10px;
             overflow: hidden;
             border: 2px solid #ff4444;
+            transform: scale(1.143); /* 8/7 = 1.143 */
+            transform-origin: center center;
         }
 
         .game-frame {
@@ -246,17 +247,156 @@
         }
 
         @media (max-width: 768px) {
+            .header {
+                padding: 10px 0;
+            }
+
+            .header-content h1 {
+                font-size: 20px;
+            }
+
+            .home-button {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+
             .game-section {
+                margin-top: 60px;
                 padding: 10px;
             }
 
             .game-container {
                 padding: 10px;
+                border-radius: 10px;
             }
 
             .game-wrapper {
                 aspect-ratio: 4/3;
+                border-width: 1px;
             }
+
+            .game-info-section {
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .game-info-section h2 {
+                font-size: 18px;
+                margin-bottom: 10px;
+                padding-bottom: 8px;
+            }
+
+            .game-info-section .info-block h3 {
+                font-size: 16px;
+            }
+
+            .game-info-section p,
+            .game-info-section ul li {
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 6px;
+            }
+
+            .footer {
+                margin-top: 20px;
+                padding: 15px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 18px;
+            }
+
+            .home-button {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            .game-section {
+                margin-top: 50px;
+                padding: 5px;
+            }
+
+            .game-container {
+                padding: 5px;
+            }
+
+            .game-wrapper {
+                aspect-ratio: 1/1;  /* 在最小屏幕上使用正方形比例 */
+            }
+
+            .game-info-section {
+                padding: 10px;
+            }
+
+            .game-info-section .info-block {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* 横屏模式优化 */
+        @media (max-width: 896px) and (orientation: landscape) {
+            .game-section {
+                margin-top: 50px;
+            }
+
+            .game-wrapper {
+                aspect-ratio: 16/9;  /* 横屏时保持16:9比例 */
+                max-height: 70vh;
+            }
+
+            .game-info-section {
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* 适配刘海屏 */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            .header {
+                padding-top: env(safe-area-inset-top);
+            }
+
+            .game-section {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+
+            .footer {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+
+        .timed-overlay {
+            position: absolute;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 66.66%;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            transform: scale(1.143);
+            transform-origin: center center;
+            transition: opacity 0.5s ease;
+        }
+
+        .timed-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .right-overlay {
+            position: absolute;
+            top: 0;
+            right: -3%;
+            width: 20%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1000;
+            transform: scale(1.143);
+            transform-origin: right center;
         }
     </style>
 </head>
@@ -279,6 +419,8 @@
                     allow="autoplay"
                     allowfullscreen>
                 </iframe>
+                <div class="timed-overlay"></div>
+                <div class="right-overlay"></div>
             </div>
             <div class="game-info-section">
                 <h2>游戏说明</h2>
@@ -317,6 +459,15 @@
     <script>
         // 获取iframe元素
         const gameFrame = document.querySelector('.game-frame');
+        const timedOverlay = document.querySelector('.timed-overlay');
+        
+        // 10秒后隐藏覆盖层
+        setTimeout(() => {
+            timedOverlay.classList.add('hidden');
+            setTimeout(() => {
+                timedOverlay.remove();
+            }, 500);
+        }, 10000);
 
         // 监听iframe加载完成事件
         gameFrame.addEventListener('load', function() {
