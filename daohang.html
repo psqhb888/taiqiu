@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GameHub - Your Ultimate Online Gaming Destination. Play thousands of free online games including action, adventure, puzzle, and more. No download required!">
+    <meta name="keywords" content="online games, free games, browser games, HTML5 games, casual games, action games, puzzle games">
+    <title>GameHub - Free Online Games | Play Now</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f6fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(231, 76, 60, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        .shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 30%;
+            right: 20%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 100px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 200px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-100px, 100px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(30, 136, 229, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            background: #f5f5f5;
+            color: var(--secondary-color);
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .language-switch {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .more-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .more-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            aspect-ratio: 3/4; /* 固定卡片宽高比 */
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .game-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 75%; /* 4:3 比例 */
+            overflow: hidden;
+        }
+
+        .game-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保持图片比例并填充容器 */
+            object-position: center; /* 居中显示 */
+        }
+
+        .game-info {
+            padding: 10px;
+            height: 25%; /* 固定信息区域高度 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .game-title {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-height: 1.2;
+            max-height: 2.4em; /* 固定两行高度 */
+            word-break: break-word;
+        }
+
+        .game-category {
+            font-size: 0.8rem;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .friend-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .friend-link {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .friend-link:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .game-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .language-switch {
+                gap: 0.5rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .more-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .game-card {
+                margin-bottom: 10px;
+            }
+
+            .game-image {
+                height: 100px;
+            }
+
+            .game-title {
+                font-size: 0.85rem;
+                line-height: 1.1;
+                max-height: 2.2em;
+            }
+
+            .game-category {
+                font-size: 0.75rem;
+            }
+
+            .ad-section {
+                margin: 80px 15px 20px;
+                gap: 15px;
+            }
+
+            .ad-box {
+                min-height: 80px;
+                padding: 15px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .header-left {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .friend-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .friend-link {
+                font-size: 0.9rem;
+                padding: 4px 8px;
+            }
+
+            .footer {
+                padding: 15px;
+            }
+
+            .footer-content p {
+                font-size: 0.9rem;
+            }
+
+            .game-card {
+                max-width: 300px; /* 限制手机端最大宽度 */
+                margin: 0 auto; /* 居中显示 */
+            }
+
+            .game-title {
+                font-size: 0.8rem;
+                line-height: 1.1;
+                max-height: 2em;
+            }
+            
+            .game-category {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* 添加平板设备的优化 */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .game-grid {
+                gap: 12px;
+            }
+
+            .game-image {
+                height: 110px;
+            }
+
+            .section {
+                padding: 18px;
+            }
+
+            .ad-section {
+                margin: 90px auto 25px;
+            }
+        }
+
+        /* 添加大屏幕设备的优化 */
+        @media (min-width: 1400px) {
+            .main-content {
+                max-width: 1400px;
+            }
+
+            .game-grid {
+                gap: 20px;
+            }
+
+            .game-image {
+                height: 130px;
+            }
+
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="/" class="logo">GameHub</a>
+                <nav class="nav-menu">
+                    <a href="#all">All Games</a>
+                    <a href="#popular">Popular Games</a>
+                    <a href="#new">New Games</a>
+                </nav>
+            </div>
+            <div class="language-switch">
+                <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('zh')">中文</button>
+            </div>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </header>
+
+    <div class="mobile-menu">
+        <a href="#all">All Games</a>
+        <a href="#popular">Popular Games</a>
+        <a href="#new">New Games</a>
+    </div>
+
+    <div class="ad-section">
+        <div class="ad-box ad-placeholder">
+            <span>Advertisement Space 1</span>
+        </div>
+        <div class="ad-box ad-placeholder">
+            <span>Advertisement Space 2</span>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <!-- Popular Games Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">Popular Games</h2>
+                <a href="#" class="more-btn">More Games</a>
+            </div>
+            <div class="game-grid">
+                <!-- Game Cards will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- New Games Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">New Games</h2>
+                <a href="#" class="more-btn">More Games</a>
+            </div>
+            <div class="game-grid">
+                <!-- Game Cards will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 GameHub. All rights reserved.</p>
+            <div class="friend-links">
+                <a href="#" class="friend-link">GameLink 1</a>
+                <a href="#" class="friend-link">GameLink 2</a>
+                <a href="#" class="friend-link">GameLink 3</a>
+                <a href="#" class="friend-link">GameLink 4</a>
+                <a href="#" class="friend-link">GameLink 5</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample game data
+        const games = {
+            popular: [
+                { title: "Rise Up", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "2048", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Snake", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Tetris", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Pacman", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Minecraft", category: "Adventure", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Angry Birds", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Candy Crush", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Subway Surfers", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Fruit Ninja", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Crossy Road", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Temple Run", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Cut the Rope", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Plants vs Zombies", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Bejeweled", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Monster Truck", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Bubble Shooter", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Zombie Defense", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Car Racing", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Word Search", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Space Shooter", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Math Blaster", category: "Educational", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Chess", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "Checkers", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" }
+            ],
+            new: [
+                { title: "New Game 1", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 2", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 3", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 4", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 5", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 6", category: "Educational", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 7", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 8", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 9", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 10", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 11", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 12", category: "Educational", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 13", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 14", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 15", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 16", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 17", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 18", category: "Educational", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 19", category: "Action", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 20", category: "Puzzle", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 21", category: "Arcade", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 22", category: "Strategy", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 23", category: "Racing", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" },
+                { title: "New Game 24", category: "Educational", image: "https://img.freepik.com/free-vector/neon-style-coming-soon-glowing-background-design_1017-25516.jpg" }
+        ]
+        };
+
+        // Function to create game cards
+        function createGameCard(game) {
+            return `
+                <div class="game-card">
+                    <div class="game-image-container">
+                        <img src="${game.image}" alt="${game.title}" class="game-image">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-category">${game.category}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to populate game sections
+        function populateGameSections() {
+            const popularGamesGrid = document.querySelector('.section:first-child .game-grid');
+            const newGamesGrid = document.querySelector('.section:last-child .game-grid');
+
+            popularGamesGrid.innerHTML = games.popular.map(createGameCard).join('');
+            newGamesGrid.innerHTML = games.new.map(createGameCard).join('');
+        }
+
+        // Language translations
+        const translations = {
+            en: {
+                popular: "Popular Games",
+                new: "New Games",
+                more: "More Games",
+                home: "Home"
+            },
+            zh: {
+                popular: "热门游戏",
+                new: "最新游戏",
+                more: "更多游戏",
+                home: "首页"
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang) {
+            document.querySelector('.section:first-child .section-title').textContent = translations[lang].popular;
+            document.querySelector('.section:last-child .section-title').textContent = translations[lang].new;
+            document.querySelectorAll('.more-btn').forEach(btn => {
+                btn.textContent = translations[lang].more;
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            populateGameSections();
+            
+            // 移动菜单切换
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+
+            // 点击菜单项后关闭菜单
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
