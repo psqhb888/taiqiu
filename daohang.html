@@ -532,43 +532,39 @@
                 padding: 15px 0;  /* 移除左右内边距，保留上下内边距 */
             }
 
+            .header {
+                padding: 0.25rem;  /* 从 0.5rem 减半 */
+            }
+
             .header-content {
-                flex-direction: column;
+                flex-direction: row;  /* 改为横向排列 */
+                justify-content: space-between;
                 align-items: center;
-                gap: 10px;
-                text-align: center;
+                gap: 5px;  /* 从 10px 减半 */
             }
 
             .logo {
-                font-size: 1.6rem;
+                font-size: 1.2rem;  /* 从 1.6rem 改小 */
             }
 
-            .section-title {
-                font-size: 1.2rem;
+            .lang-btn {
+                padding: 0.15rem 0.5rem;  /* 减小内边距 */
+                font-size: 0.8rem;  /* 减小字体 */
+                border-width: 1px;  /* 减小边框宽度 */
             }
 
-            .section-header {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+            .mobile-menu-btn {
+                font-size: 1.2rem;  /* 减小菜单按钮大小 */
+                padding: 0.25rem;  /* 减小内边距 */
             }
 
-            .friend-links {
-                flex-wrap: wrap;
-                gap: 10px;
+            /* 调整顶部间距 */
+            .top-ad-section {
+                margin-top: 40px;  /* 从 50px 减小 */
             }
 
-            .friend-link {
-                font-size: 0.9rem;
-                padding: 4px 8px;
-            }
-
-            .footer {
-                padding: 15px;
-            }
-
-            .footer-content p {
-                font-size: 0.9rem;
+            .mobile-menu {
+                top: 35px;  /* 从 70px 减半 */
             }
         }
 
